@@ -1,1 +1,110 @@
-<h1 id="book-name">Hello</h1>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<h1 id="book-name"></h1>
+
+<script>
+    const SECOND_ADJ_CHANCE = 0.5;
+
+    var people = [
+        {name : "Војислав Шешељ", gender : "m"},
+        {name : "Александар Вучић", gender : "m"},
+        {name : "Томислав Николић", gender : "m"},
+        {name : "Небојша Човић", gender : "m"},
+        {name : "Слободан Милошевић", gender : "m"},
+        {name : "Млађан Динкић", gender : "m"},
+        {name : "Војислав Коштуница", gender : "m"},
+        {name : "Јосип Броз Тито", gender : "m"},
+        {name : "Мило Ђукановић", gender : "m"},
+        {name : "Тејлор Свифт", gender : "f"},
+        {name : "Наташа Кандић", gender : "f"},
+        {name : "Весна Пешић", gender : "f"},
+        {name : "Маја Гојковић", gender : "f"},
+        {name : "Јован Павле Други", gender : "m"},
+        {name : "Александар Мартиновић", gender : "m"},
+        {name : "Зоран Кесић", gender : "m"},
+        {name : "Сергеј Трифуновић", gender : "m"},
+        {name : "Саша Јанковић", gender : "m"},
+        {name : "Алија Изетбеговић", gender : "m"},
+        {name : "Фрањо Туђман", gender : "m"},
+        {name : "Саша Радуловић", gender : "m"}
+    ];
+
+    var titles = [
+        {gendered : false, word_main : "мудо", gender_main : "n", word_alt : "", gender_alt : ""},
+        {gendered : false, word_main : "курва", gender_main : "f", word_alt : "", gender_alt : ""},
+        {gendered : false, word_main : "копиле", gender_main : "n", word_alt : "", gender_alt : ""},
+        {gendered : false, word_main : "шпијун", gender_main : "m", word_alt : "", gender_alt : ""},
+        {gendered : true, word_main : "издајник", gender_main : "m", word_alt : "издајница", gender_alt : ""},
+        {gendered : false, word_main : "усташа", gender_main : "m", word_alt : "", gender_alt : ""},
+        {gendered : true, word_main : "кагебеовац", gender_main : "m", word_alt : "кагебеовка", gender_alt : "f"},
+        {gendered : true, word_main : "вепар", gender_main : "m", word_alt : "крмача", gender_alt : "f"},
+        {gendered : false, word_main : "говно", gender_main : "n", word_alt : "", gender_alt : ""},
+        {gendered : true, word_main : "пицопевац", gender_main : "m", word_alt : "пицопевка", gender_alt : "f"},
+        {gendered : true, word_main : "плаћеник", gender_main : "m", word_alt : "плаћеница", gender_alt : "f"},
+        {gendered : false, word_main : "караконџула", gender_main : "f", word_alt : "", gender_alt : ""},
+        {gendered : false, word_main : "масон", gender_main : "m", word_alt : "", gender_alt : ""},
+        {gendered : false, word_main : "пичкица", gender_main : "f", word_alt : "", gender_alt : ""},
+    ];
+
+    var adjectives = [
+        {m: "кенгуров", f: "кенгурова", n: "кенгурово"},
+        {m: "смежурани", f: "смежурана", n: "смежурано"},
+        {m: "цијин", f: "цијина", n: "цијино"},
+        {m: "мосадов", f: "мосадова", n: "мосадово"},
+        {m: "комунистички", f: "комунистичка", n: "комунистичко"},
+        {m: "издајнички", f: "издајничка", n: "издајничко"},   
+        {m: "масонски", f: "масонска", n: "масонско"}, 
+        {m: "римокатолички", f: "римокатоличка", n: "римокатоличко"}, 
+        {m: "хрватски", f: "хрватска", n: "хрватско"}, 
+        {m: "балијски", f: "балијска", n: "балијско"},  
+    ]
+
+    var result = "";
+    var person = people[Math.floor(Math.random() * people.length)];
+    result = result + person.name;
+
+    var chosen_title = titles[Math.floor(Math.random() * titles.length)]
+    var title_gender = "";
+    if (chosen_title.gendered) {
+        var gender = person.gender;
+        if (chosen_title.gender_main == person.gender) {
+            title_gender = chosen_title.gender_main;
+            result = chosen_title.word_main + " " + result;
+        } else {
+            title_gender = chosen_title.gender_alt;
+            result = chosen_title.word_alt + " " + result;
+        }
+    } else {
+        title_gender = chosen_title.gender_main;
+        result = chosen_title.word_main + " " + result;
+    }
+
+    var first_adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+
+    if (title_gender == "m") {
+        result = first_adj.m + " " + result;
+    } else if (title_gender == "f") {
+        result = first_adj.f + " " + result;
+    } else {
+        result = first_adj.n + " " + result;
+    }
+
+    var second_adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+
+    if (Math.random() < SECOND_ADJ_CHANCE && first_adj != second_adj) {
+        if (title_gender == "m") {
+        result = second_adj.m + " " + result;
+        } else if (title_gender == "f") {
+            result = second_adj.f + " " + result;
+        } else {
+            result = second_adj.n + " " + result;
+        }
+    }
+
+    result = result.charAt(0).toUpperCase() + result.slice(1)
+
+    var element = document.getElementById("book-name");
+    element.innerText = result;
+</script>
