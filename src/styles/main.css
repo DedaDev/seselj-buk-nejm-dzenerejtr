@@ -1,0 +1,46 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+	font-family: miroslav;
+	src: url(/src/assets/miroslav.ttf) format("truetype");
+}
+
+body {
+	background-color: #415884;
+}
+
+main {
+	display: grid;
+	place-items: center;
+}
+
+.book-element {
+	position: relative;
+}
+
+.book {
+	height: 100vh;
+}
+
+#title {
+	color: #c1b679;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 3.5rem;
+	transform: translate(-45%, -50%);
+	max-width: 80vh;
+	text-align: center;
+	background-image: linear-gradient(170deg, #dbd5ba, #8a7359);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-moz-text-fill-color: transparent;
+	font-family: miroslav;
+	letter-spacing: 3px;
+}
